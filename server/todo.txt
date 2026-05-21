@@ -1,0 +1,92 @@
+basically has all the backend logic
+
+>>authentication for sign in sign up etc
+we'll be usinng pydantic for this
+>>in frameworks like fastapi and django
+models.py is basically the file where you define the structure of your database data
+it basically translates python into tabels
+basically jaise @Entity annotation in java
+@Entity
+Class User is equivalent to class User(models.Model) or
+class User(Base)
+
+config
+for connecting with mongodb
+
+
+routes.py- we creeate api routes here
+APIRouter enables you to create different routes in different file instead of 
+writing them all in one place fastapi allows you can write them in different modules or places
+Example:
+
+auth routes
+chat routes
+upload routes
+router=APIRouter()
+creates a mini router manager used instead of app=fastapi()
+also instead of app.get("") you write router.get()
+then later in main.py you write app.include_router(router)
+This keeps code modular and clean.
+
+
+ if users_collection.find_one({"username" : req.username}):
+        raise HTTPException(status_code=400,detail="Username already exists")
+    
+Mongodb -
+rows documents
+{"username" : req.username} query we have passed
+find_one= finds one doccument at a time
+find = gives back or finds all the documents
+
+
+HttpBaic
+-A tool
+-Tell fastapi
+-That this route expects username,password
+-HttpBaic() extracts username and password from incoming requests
+
+Credentials
+-object that contains username and password
+-fastapi automatically creates a requests
+{
+        username="",
+        password=""
+}
+
+
+Authenticate-
+User enters username+password ->authenticate() checks them-> checks if password is correct ->>
+if correct ->> allow acees else ->> throw error
+
+HttpBaicCredentials
+-class provided by fastapi
+-Stores login credentials
+
+Depends(Security)
+-fastapi dependecy injection
+Basivally it says before running this authenticate function run secutiy and give me the result
+
+secutiy
+secuity=HttpBasic()
+tells this route requires username+password authentication
+
+What actually happens?
+
+Suppose user sends request:
+
+Username: anuj
+Password: 1234
+
+FastAPI does this internally:
+
+credentials = HTTPBasicCredentials(
+    username="anuj",
+    password="1234"
+)
+So this line:
+credentials:HTTPBasicCredentials=Depends(security)
+
+basically means:
+
+Get username and password from request automatically
+and store them inside credentials

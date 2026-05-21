@@ -1,0 +1,41 @@
+Depends
+HTTPBasic
+authenticate
+router.get
+credentials
+verify_password
+security
+def login(user=Depends(autheticate)):
+ basically says before running login run authenticate()
+ this function depends on authenticate
+ and authenticate depends on security;
+ before authenticate secuurity runs
+ security=HTTPBasic()
+ tells fastapi:
+ ask user for username and password
+ then it creates cresdentials
+ credentials = HTTPBasicCredentials(
+    username="anuj",
+    password="1234"
+)
+User calls /login
+        ↓
+FastAPI sees Depends(authenticate)
+        ↓
+Runs authenticate()
+        ↓
+authenticate sees Depends(security)
+        ↓
+Runs HTTPBasic()
+        ↓
+Gets username/password
+        ↓
+Searches MongoDB
+        ↓
+Checks password
+        ↓
+Returns username
+        ↓
+login(user=username)
+        ↓
+Returns Welcome message
