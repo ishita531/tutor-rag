@@ -1,0 +1,4 @@
+PDF->>
+Chunking ->>
+Mongodb(full text storage)->>
+pinecone(embedding+metadata)
