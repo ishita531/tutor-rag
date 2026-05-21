@@ -1,4 +1,5 @@
 # TutorRAG
+🚀 **[Live Demo](https://tutor-rag-qbdh9h7dpnaji2rhixkxsr.streamlit.app/)** | 
 
 AI-powered educational RAG platform that enables students and teachers to upload PDFs, perform semantic search, generate citation-aware answers, and create AI-powered MCQs from study material.
 
